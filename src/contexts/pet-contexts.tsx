@@ -5,7 +5,8 @@ import React, { useContext, useState, createContext } from "react";
 // Define the context type
 interface PetContextType {
   pets: PetListType[];
-  selectedPets: string | null;
+  selectedPets: PetListType | undefined;
+  setSelectedPets: React.Dispatch<React.SetStateAction<PetListType | undefined>>;
 }
 
 // Create the context with a default value
@@ -19,14 +20,15 @@ export default function PetContextProvider({
   petList: PetListType[];
 }) {
   const [pets, setPets] = useState<PetListType[]>(petList);
-  const [selectedPets, setSelectedPets] = useState<string | null>(null);
+  const [selectedPets, setSelectedPets] = useState<PetListType | undefined>();
 
   return (
-    <PetContext.Provider value={{ pets, selectedPets }}>
+    <PetContext.Provider value={{ pets, selectedPets, setSelectedPets }}>
       {children}
     </PetContext.Provider>
   );
 }
+
 export function usePetContext() {
   const context = useContext(PetContext);
   if (!context) {
