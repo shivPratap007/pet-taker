@@ -6,11 +6,8 @@ import React from "react";
 
 export default function PetDetails() {
   const { selectedPets } = usePetContext();
-  console.log(selectedPets);
 
-  if (!selectedPets) {
-    return null;
-  }
+  
 
   return (
     <section className="w-full h-full text-black">
