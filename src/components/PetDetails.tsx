@@ -1,13 +1,12 @@
 "use client";
 import { usePetContext } from "@/contexts/pet-contexts";
+import { useSearchPetContext } from "@/contexts/search-context";
 import { PetListType } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
 
 export default function PetDetails() {
   const { selectedPets } = usePetContext();
-
-  
 
   return (
     <section className="w-full h-full text-black">

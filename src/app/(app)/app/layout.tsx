@@ -3,6 +3,7 @@ import AppHeader from "../../../components/AppHeader";
 import AppFooter from "@/components/AppFooter";
 import PetContextProvider from "@/contexts/pet-contexts";
 import { PetListType } from "@/lib/types";
+import SearchPetContextProvider from "@/contexts/search-context";
 
 export default async function RootLayout({
   children,
@@ -21,7 +22,9 @@ export default async function RootLayout({
       <BackgroundPattern />
       <div className="flex min-h-screen flex-col max-w-[1050px] mx-auto">
         <AppHeader />
-        <PetContextProvider petList={petList}>{children}</PetContextProvider>
+        {/* <SearchPetContextProvider> */}
+          <PetContextProvider petList={petList}>{children}</PetContextProvider>
+        {/* </SearchPetContextProvider> */}
         <AppFooter />
       </div>
     </>

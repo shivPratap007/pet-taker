@@ -1,11 +1,21 @@
 "use client";
 import { usePetContext } from "@/contexts/pet-contexts";
+import { useSearchPetContext } from "@/contexts/search-context";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 
 export default function PetList() {
-  const { pets, setSelectedPets, selectedPets } = usePetContext();
+  let { pets, setSelectedPets, selectedPets } = usePetContext();
+  const { searchPet } = useSearchPetContext();
+
+  // Pets array based on the search input
+  if (searchPet) {
+    const newPets = pets.filter((pet) =>
+      pet.name.toLowerCase().includes(searchPet.toLowerCase())
+    );
+    pets = [...newPets];
+  }
   return (
     <ul className="bg-white border-b border-black/[.08]">
       {pets.map((pet) => (
