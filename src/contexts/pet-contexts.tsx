@@ -6,7 +6,11 @@ import React, { useContext, useState, createContext } from "react";
 interface PetContextType {
   pets: PetListType[];
   selectedPets: PetListType | undefined;
-  setSelectedPets: React.Dispatch<React.SetStateAction<PetListType | undefined>>;
+  setSelectedPets: React.Dispatch<
+    React.SetStateAction<PetListType | undefined>
+  >;
+  updateListAfterDeletePets(deletePetId: string): void;
+  totalPets: number;
 }
 
 // Create the context with a default value
@@ -22,8 +26,24 @@ export default function PetContextProvider({
   const [pets, setPets] = useState<PetListType[]>(petList);
   const [selectedPets, setSelectedPets] = useState<PetListType | undefined>();
 
+  const totalPets = pets.length;
+
+  function updateListAfterDeletePets(deletePetId: string) {
+    const newPets = pets.filter((pet) => pet.id != deletePetId);
+    setPets(() => [...newPets]);
+    setSelectedPets(undefined);
+  }
+
   return (
-    <PetContext.Provider value={{ pets, selectedPets, setSelectedPets }}>
+    <PetContext.Provider
+      value={{
+        pets,
+        totalPets,
+        selectedPets,
+        setSelectedPets,
+        updateListAfterDeletePets,
+      }}
+    >
       {children}
     </PetContext.Provider>
   );

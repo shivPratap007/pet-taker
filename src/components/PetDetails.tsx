@@ -35,7 +35,7 @@ function EmptyView() {
 }
 
 function TopBar({ pet }: Props) {
-  // const { handleCheckoutPet } = usePetContext();
+  const { updateListAfterDeletePets } = usePetContext();
 
   return (
     <div className="flex items-center bg-white px-8 py-5 border-b border-light">
@@ -60,7 +60,7 @@ function TopBar({ pet }: Props) {
       </div> */}
       <div className="ml-auto flex flex-col gap-2 sm:flex-row ">
         <PetButton actionType={"edit"} />
-        <PetButton actionType={"checkout"} />
+        <PetButton actionType={"checkout"} onClick={()=>updateListAfterDeletePets(pet.id)} />
       </div>
     </div>
   );
