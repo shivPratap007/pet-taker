@@ -4,6 +4,7 @@ import { useSearchPetContext } from "@/contexts/search-context";
 import { PetListType } from "@/lib/types";
 import Image from "next/image";
 import React from "react";
+import PetButton from "./PetButton";
 
 export default function PetDetails() {
   const { selectedPets } = usePetContext();
@@ -57,6 +58,10 @@ function TopBar({ pet }: Props) {
           Checkout
         </PetButton>
       </div> */}
+      <div className="ml-auto flex flex-col gap-2 sm:flex-row ">
+        <PetButton actionType={"edit"} />
+        <PetButton actionType={"checkout"} />
+      </div>
     </div>
   );
 }
