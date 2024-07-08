@@ -1,5 +1,15 @@
 import { cn } from "@/lib/utils";
 
-export default function Heading({ children }: { children: React.ReactNode }) {
-  return <h1 className="font-medium text-2xl leading-6">{children}</h1>;
+export default function Heading({
+  children,
+  customClasses,
+}: {
+  children: React.ReactNode;
+  customClasses?: string;
+}) {
+  return (
+    <h1 className={cn("font-medium text-2xl leading-6", customClasses)}>
+      {children}
+    </h1>
+  );
 }
