@@ -5,7 +5,18 @@ import PetDetails from "@/components/PetDetails";
 import PetList from "@/components/PetList";
 import SearchForm from "@/components/SearchForm";
 import Stats from "@/components/Stats";
+import { Button } from "@/components/ui/button";
+import { DialogHeader, DialogFooter } from "@/components/ui/dialog";
 import SearchPetContextProvider from "@/contexts/search-context";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@radix-ui/react-dialog";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "@/components/ui/input";
 
 export default async function Dashboard() {
   return (
@@ -26,14 +37,16 @@ export default async function Dashboard() {
               <PetList />
 
               <div className="absolute bottom-4 right-4 text-black">
-                <PetButton actionType={"add"} />
+              <PetButton actionType={"add"} />
+
+                
               </div>
             </ContentBlock>
           </div>
 
           <div className="md:row-start-1 md:row-span-full md:col-start-2 md:col-span-full">
             <ContentBlock>
-              <PetDetails  />
+              <PetDetails />
             </ContentBlock>
           </div>
         </div>

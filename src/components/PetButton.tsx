@@ -1,4 +1,4 @@
-import { PlusIcon } from "@radix-ui/react-icons";
+import PetForm from "./PetForm";
 import { Button } from "./ui/button";
 
 export default function PetButton({
@@ -9,13 +9,9 @@ export default function PetButton({
   onClick?: () => void;
 }) {
   if (actionType === "add") {
-    return (
-      <Button size="icon">
-        <PlusIcon />
-      </Button>
-    );
+    return <PetForm actionType={actionType} />;
   } else if (actionType === "edit") {
-    return <Button variant="secondary">Edit</Button>;
+    return <PetForm actionType={actionType} />;
   } else if (actionType === "checkout") {
     return (
       <Button variant="destructive" onClick={onClick}>
