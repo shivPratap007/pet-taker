@@ -1,4 +1,5 @@
 "use client";
+import { addPet } from "@/actions/actions";
 import { PetListType } from "@/lib/types";
 import { generateRandomId } from "@/utils/randomId";
 import React, { useContext, useState, createContext } from "react";
@@ -31,9 +32,10 @@ export default function PetContextProvider({
 
   const totalPets = pets.length;
 
-  function addNewPets(newPet: Omit<PetListType, "id">) {
-    const petWithId: PetListType = { ...newPet, id: generateRandomId() };
-    setPets((prev) => [...prev, petWithId]);
+  async function addNewPets(newPet: Omit<PetListType, "id">) {
+    // const petWithId: PetListType = { ...newPet, id: generateRandomId() };
+    // setPets((prev) => [...prev, petWithId]);
+    // await addPet(newPet)
   }
 
   function updateListAfterDeletePets(deletePetId: string) {

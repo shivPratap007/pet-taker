@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { FormEvent, useState } from "react";
 import { usePetContext } from "@/contexts/pet-contexts";
+import { addPet } from "@/actions/actions";
 
 export default function PetForm({
   actionType,
@@ -25,40 +26,40 @@ export default function PetForm({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name") as string;
-    const ownerName = formData.get("name") as string;
-    const imageUrl = formData.get("imageUrl") as string;
-    const notes = formData.get("notes") as string;
-    let age = parseInt(formData.get("age") as string);
+  // function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.currentTarget);
+  //   const name = formData.get("name") as string;
+  //   const ownerName = formData.get("name") as string;
+  //   const imageUrl = formData.get("imageUrl") as string;
+  //   const notes = formData.get("notes") as string;
+  //   let age = parseInt(formData.get("age") as string);
 
-    if (!name || !ownerName || !imageUrl || !age) {
-      alert("Please enter all the fields");
-      return;
-    }
+  //   if (!name || !ownerName || !imageUrl || !age) {
+  //     alert("Please enter all the fields");
+  //     return;
+  //   }
 
-    if (actionType === "add") {
-      addNewPets({
-        name,
-        ownerName,
-        imageUrl,
-        age,
-        notes,
-      });
-    } else {
-      updatePetAndModifyPetList({
-        id: selectedPets?.id!,
-        name,
-        ownerName,
-        imageUrl,
-        age,
-        notes,
-      });
-    }
-    setIsOpen(false);
-  }
+  //   if (actionType === "add") {
+  //     addNewPets({
+  //       name,
+  //       ownerName,
+  //       imageUrl,
+  //       age,
+  //       notes,
+  //     });
+  //   } else {
+  //     updatePetAndModifyPetList({
+  //       id: selectedPets?.id!,
+  //       name,
+  //       ownerName,
+  //       imageUrl,
+  //       age,
+  //       notes,
+  //     });
+  //   }
+  //   setIsOpen(false);
+  // }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -77,7 +78,7 @@ export default function PetForm({
             {actionType === "add" ? "Add a new pet" : "Edit the pet"}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
+        <form action={addPet}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
