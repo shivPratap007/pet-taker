@@ -1,5 +1,6 @@
 "use client";
 import { PetListType } from "@/lib/types";
+import { generateRandomId } from "@/utils/randomId";
 import React, { useContext, useState, createContext } from "react";
 
 // Define the context type
@@ -11,6 +12,7 @@ interface PetContextType {
   >;
   updateListAfterDeletePets(deletePetId: string): void;
   totalPets: number;
+  addNewPets(newPet: Omit<PetListType, "id">): void;
 }
 
 // Create the context with a default value
@@ -28,6 +30,11 @@ export default function PetContextProvider({
 
   const totalPets = pets.length;
 
+  function addNewPets(newPet: Omit<PetListType, "id">) {
+    const petWithId: PetListType = { ...newPet, id: generateRandomId() };
+    setPets((prev) => [...prev, petWithId]);
+  }
+
   function updateListAfterDeletePets(deletePetId: string) {
     const newPets = pets.filter((pet) => pet.id != deletePetId);
     setPets(() => [...newPets]);
@@ -42,6 +49,7 @@ export default function PetContextProvider({
         selectedPets,
         setSelectedPets,
         updateListAfterDeletePets,
+        addNewPets,
       }}
     >
       {children}

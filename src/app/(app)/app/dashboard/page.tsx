@@ -5,18 +5,8 @@ import PetDetails from "@/components/PetDetails";
 import PetList from "@/components/PetList";
 import SearchForm from "@/components/SearchForm";
 import Stats from "@/components/Stats";
-import { Button } from "@/components/ui/button";
-import { DialogHeader, DialogFooter } from "@/components/ui/dialog";
 import SearchPetContextProvider from "@/contexts/search-context";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@radix-ui/react-dialog";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "@/components/ui/input";
+
 
 export default async function Dashboard() {
   return (
