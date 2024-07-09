@@ -13,6 +13,7 @@ interface PetContextType {
   updateListAfterDeletePets(deletePetId: string): void;
   totalPets: number;
   addNewPets(newPet: Omit<PetListType, "id">): void;
+  updatePetAndModifyPetList(petObj: PetListType): void;
 }
 
 // Create the context with a default value
@@ -41,6 +42,14 @@ export default function PetContextProvider({
     setSelectedPets(undefined);
   }
 
+  function updatePetAndModifyPetList(petObj: PetListType) {
+    const updatedPets = pets.filter((pet) => pet.id !== petObj.id);
+    setPets([...updatedPets, petObj]);
+
+    // UPDATE SELECTED PET STATE
+    setSelectedPets({ ...petObj });
+  }
+
   return (
     <PetContext.Provider
       value={{
@@ -49,6 +58,7 @@ export default function PetContextProvider({
         selectedPets,
         setSelectedPets,
         updateListAfterDeletePets,
+        updatePetAndModifyPetList,
         addNewPets,
       }}
     >

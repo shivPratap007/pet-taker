@@ -20,9 +20,10 @@ export default function PetForm({
 }: {
   actionType: "add" | "edit";
 }) {
-  const { addNewPets } = usePetContext();
+  const { addNewPets, selectedPets, updatePetAndModifyPetList } =
+    usePetContext();
 
-  const[isOpen,setIsOpen]=useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,13 +39,24 @@ export default function PetForm({
       return;
     }
 
-    addNewPets({
-      name,
-      ownerName,
-      imageUrl,
-      age,
-      notes,
-    });
+    if (actionType === "add") {
+      addNewPets({
+        name,
+        ownerName,
+        imageUrl,
+        age,
+        notes,
+      });
+    } else {
+      updatePetAndModifyPetList({
+        id: selectedPets?.id!,
+        name,
+        ownerName,
+        imageUrl,
+        age,
+        notes,
+      });
+    }
     setIsOpen(false);
   }
 
@@ -61,7 +73,9 @@ export default function PetForm({
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add a new pet</DialogTitle>
+          <DialogTitle>
+            {actionType === "add" ? "Add a new pet" : "Edit the pet"}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
@@ -69,31 +83,70 @@ export default function PetForm({
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
-              <Input required id="name" name="name" className="col-span-3" />
+              <Input
+                defaultValue={`${
+                  actionType == "edit" ? selectedPets?.name : ""
+                }`}
+                required
+                id="name"
+                name="name"
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="ownerName" className="text-right">
                 Owner Name
               </Label>
-              <Input required id="ownerName" name="ownerName" className="col-span-3" />
+              <Input
+                defaultValue={`${
+                  actionType == "edit" ? selectedPets?.ownerName : ""
+                }`}
+                required
+                id="ownerName"
+                name="ownerName"
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="imageUrl" className="text-right">
                 Image url
               </Label>
-              <Input  id="imageUrl" name="imageUrl" className="col-span-3" />
+              <Input
+                id="imageUrl"
+                defaultValue={`${
+                  actionType == "edit" ? selectedPets?.imageUrl : ""
+                }`}
+                name="imageUrl"
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="age" className="text-right">
                 Age
               </Label>
-              <Input required id="age" name="age" className="col-span-3" />
+              <Input
+                defaultValue={`${
+                  actionType == "edit" ? selectedPets?.age : ""
+                }`}
+                required
+                id="age"
+                name="age"
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="notes" className="text-right">
                 Notes
               </Label>
-              <Textarea required id="notes" name="notes" className="col-span-3" />
+              <Textarea
+                defaultValue={`${
+                  actionType == "edit" ? selectedPets?.notes : ""
+                }`}
+                required
+                id="notes"
+                name="notes"
+                className="col-span-3"
+              />
             </div>
           </div>
           <DialogFooter>
