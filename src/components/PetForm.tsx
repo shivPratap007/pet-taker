@@ -21,8 +21,7 @@ export default function PetForm({
 }: {
   actionType: "add" | "edit";
 }) {
-  const { addNewPets, selectedPets, updatePetAndModifyPetList } =
-    usePetContext();
+  const { selectedPets } = usePetContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -151,7 +150,7 @@ export default function PetForm({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">
+            <Button type="submit" >
               {actionType === "add" ? "Add pet" : "Edit pet"}
             </Button>
           </DialogFooter>

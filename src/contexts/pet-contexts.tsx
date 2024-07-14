@@ -11,10 +11,10 @@ interface PetContextType {
   setSelectedPets: React.Dispatch<
     React.SetStateAction<PetListType | undefined>
   >;
-  updateListAfterDeletePets(deletePetId: string): void;
+  // updateListAfterDeletePets(deletePetId: string): void;
   totalPets: number;
   addNewPets(newPet: Omit<PetListType, "id">): void;
-  updatePetAndModifyPetList(petObj: PetListType): void;
+  // updatePetAndModifyPetList(petObj: PetListType): void;
 }
 
 // Create the context with a default value
@@ -27,7 +27,10 @@ export default function PetContextProvider({
   children: React.ReactNode;
   petList: PetListType[];
 }) {
-  const [pets, setPets] = useState<PetListType[]>(petList);
+  // const [pets, setPets] = useState<PetListType[]>(petList);
+
+  // used the petList comming directly so that ui can re render
+  const pets=petList;
   const [selectedPets, setSelectedPets] = useState<PetListType | undefined>();
 
   const totalPets = pets.length;
@@ -38,19 +41,19 @@ export default function PetContextProvider({
     // await addPet(newPet)
   }
 
-  function updateListAfterDeletePets(deletePetId: string) {
-    const newPets = pets.filter((pet) => pet.id != deletePetId);
-    setPets(() => [...newPets]);
-    setSelectedPets(undefined);
-  }
+  // function updateListAfterDeletePets(deletePetId: string) {
+  //   const newPets = pets.filter((pet) => pet.id != deletePetId);
+  //   setPets(() => [...newPets]);
+  //   setSelectedPets(undefined);
+  // }
 
-  function updatePetAndModifyPetList(petObj: PetListType) {
-    const updatedPets = pets.filter((pet) => pet.id !== petObj.id);
-    setPets([...updatedPets, petObj]);
+  // function updatePetAndModifyPetList(petObj: PetListType) {
+  //   const updatedPets = pets.filter((pet) => pet.id !== petObj.id);
+  //   setPets([...updatedPets, petObj]);
 
-    // UPDATE SELECTED PET STATE
-    setSelectedPets({ ...petObj });
-  }
+  //   // UPDATE SELECTED PET STATE
+  //   setSelectedPets({ ...petObj });
+  // }
 
   return (
     <PetContext.Provider
@@ -59,8 +62,8 @@ export default function PetContextProvider({
         totalPets,
         selectedPets,
         setSelectedPets,
-        updateListAfterDeletePets,
-        updatePetAndModifyPetList,
+        // updateListAfterDeletePets,
+        // updatePetAndModifyPetList,
         addNewPets,
       }}
     >
