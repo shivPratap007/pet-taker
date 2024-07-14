@@ -12,11 +12,12 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { usePetContext } from "@/contexts/pet-contexts";
 import { addPet } from "@/actions/actions";
 import { delay } from "@/utils/delay";
 import PetFormBtn from "./PetFormBtn";
+import { toast } from "sonner";
 
 export default function PetForm({
   actionType,
@@ -82,7 +83,11 @@ export default function PetForm({
         <form
           action={async (formData: FormData) => {
             await delay(2000);
-            await addPet(formData);
+            const error=await addPet(formData);
+            if(error){
+              toast.warning(error.message);
+              return;
+            }
             setIsOpen(false);
           }}
         >
