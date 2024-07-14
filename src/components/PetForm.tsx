@@ -77,7 +77,12 @@ export default function PetForm({
             {actionType === "add" ? "Add a new pet" : "Edit the pet"}
           </DialogTitle>
         </DialogHeader>
-        <form action={addPet}>
+        <form
+          action={async (formData: FormData) => {
+            await addPet(formData);
+            setIsOpen(false);
+          }}
+        >
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
@@ -150,7 +155,7 @@ export default function PetForm({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" >
+            <Button type="submit">
               {actionType === "add" ? "Add pet" : "Edit pet"}
             </Button>
           </DialogFooter>
