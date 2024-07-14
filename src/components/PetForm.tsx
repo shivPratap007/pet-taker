@@ -15,6 +15,8 @@ import { Textarea } from "./ui/textarea";
 import { FormEvent, useState } from "react";
 import { usePetContext } from "@/contexts/pet-contexts";
 import { addPet } from "@/actions/actions";
+import { delay } from "@/utils/delay";
+import PetFormBtn from "./PetFormBtn";
 
 export default function PetForm({
   actionType,
@@ -79,6 +81,7 @@ export default function PetForm({
         </DialogHeader>
         <form
           action={async (formData: FormData) => {
+            await delay(2000);
             await addPet(formData);
             setIsOpen(false);
           }}
@@ -155,9 +158,7 @@ export default function PetForm({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">
-              {actionType === "add" ? "Add pet" : "Edit pet"}
-            </Button>
+          <PetFormBtn actionType={"add"}/>
           </DialogFooter>
         </form>
       </DialogContent>
